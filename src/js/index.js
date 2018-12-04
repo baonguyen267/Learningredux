@@ -4,6 +4,7 @@ import Products from './../components/Products'
 import Message from './../components/Message'
 import Cart from './../components/Cart'
 import Footer from './../components/Footer'
+import ProductsContainer from './../containers/ProductsContainer'
 class App extends Component{
    render(){
       return(
@@ -11,7 +12,7 @@ class App extends Component{
         <Header/>
             <main id="mainContainer">
                 <div className="container">
-                    <Products />
+                    <ProductsContainer />
                     <Message />
                     <Cart />
                 </div>
