@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 class CartResult extends Component{
    render(){
+       var {carts} = this.props
       return(
         <tr>
             <td colSpan="3"></td>
@@ -11,7 +13,7 @@ class CartResult extends Component{
                 </td>
             <td>
                 <h4>
-                    <strong>15$</strong>
+                    <strong>{this.showTotalAmount(carts)}$</strong>
                 </h4>
             </td>
             <td colSpan="3">
@@ -21,6 +23,16 @@ class CartResult extends Component{
             </td>
         </tr>
       );
+   }
+
+   showTotalAmount(carts){
+       var total = 0;
+       if(carts.length >0){
+           for(var i = 0;i<carts.length;i++){
+               total += carts[i].product.price * carts[i].quantity;
+           }
+       }
+       return total;
    }
 }
 export default CartResult;

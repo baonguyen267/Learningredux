@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as typeMessage from './../constant/Message'
 class Product extends Component {
     render() {
         var { product } = this.props;
@@ -19,9 +20,9 @@ class Product extends Component {
                             </strong>
                         </h4>
                         <ul className="rating">
-                        <li>
-                            {this.showRating(product.rating)}
-                        </li>
+                            <li>
+                                {this.showRating(product.rating)}
+                            </li>
                         </ul>
                         <p className="card-text">
                             {product.description}
@@ -29,7 +30,7 @@ class Product extends Component {
                         <div className="card-footer">
                             <span className="left">{product.price}$</span>
                             <span className="right">
-                                <a className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart">
+                                <a className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart" onClick={ () => this.onAddToCart(product) }>
                                     <i className="fa fa-shopping-cart"></i>
                                 </a>
                             </span>
@@ -39,16 +40,20 @@ class Product extends Component {
             </div>
         );
     }
+    onAddToCart(product){
+        this.props.onAddToCart(product);
+        this.props.onChangeMessage(typeMessage.MSG_ADD_TO_CART_SUCCESS)
+    }
 
     showRating(rating) {
         var result = [];
-        for(let i = 1;i<=rating;i++){
-            result.push(<i key={i} className="fa fa-star"></i>)       
+        for (let i = 1; i <= rating; i++) {
+            result.push(<i key={i} className="fa fa-star"></i>)
         }
-        for(var j = 1; j <= (5-rating);j++){
-            result.push(<i key={j+5} className="fa fa-star-o"></i>)       
+        for (var j = 1; j <= (5 - rating); j++) {
+            result.push(<i key={j + 5} className="fa fa-star-o"></i>)
         }
-        return(result);
+        return (result);
     }
 }
 export default Product;
